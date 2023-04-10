@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Botón Móvil</title>
+	<style>
+		#boton1 {
+			position: relative;
+			left: 50%;
+			transform: translateX(-50%);
+			padding: 10px 20px;
+			font-size: 16px;
+			background-color: green;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		#boton2 {
+			position: relative;
+			padding: 10px 20px;
+			font-size: 16px;
+			background-color: red;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<h1>Elija 1 o 0</h1>
+	<button id="boton1">1</button>
+	<button id="boton2">0</button>
+
+	<script>
+		const boton2 = document.getElementById("boton2");
+
+		boton2.addEventListener("mousemove", function(event) {
+			const x = event.clientX;
+			const y = event.clientY;
+			const botonRect = boton2.getBoundingClientRect();
+			const botonX = botonRect.left + botonRect.width/2;
+			const botonY = botonRect.top + botonRect.height/2;
+
+			const distanciaX = botonX - x;
+			const distanciaY = botonY - y;
+
+			const distancia = Math.sqrt(distanciaX*distanciaX + distanciaY*distanciaY);
+
+			if (distancia < 100) {
+				const nuevaX = botonX + (distanciaX/distancia)*100;
+				const nuevaY = botonY + (distanciaY/distancia)*100;
+				boton2.style.left = nuevaX - botonRect.width/2 + "px";
+				boton2.style.top = nuevaY - botonRect.height/2 + "px";
+			} else {
+				boton2.style.left = "";
+				boton2.style.top = "";
+			}
+		});
+	</script>
+</body>
+</html>
+
+
+
